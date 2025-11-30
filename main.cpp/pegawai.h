@@ -1,24 +1,38 @@
-#ifndef PEGAWAI_H_INCLUDED
-#define PEGAWAI_H_INCLUDED
+#ifndef PEGAWAI_H
+#define PEGAWAI_H
+
 #include <iostream>
 #include <string>
 using namespace std;
 
-typedef struct elmPeg *addrPeg;
+struct elmPegawai;
+typedef elmPegawai* addrPegawai;
 
-struct elmPeg {
-    string namaPegawai;
+struct elmPegawai {
     int idPegawai;
+    string namaPegawai;
     string jabatan;
-    int gaji;
+    float gaji;
+    string jenisPegawai;
 
-    addrPeg nextPeg;
+    addrPegawai next;
 };
 
-struct listPeg {
-    addrPeg firstPeg;
+struct listPegawai {
+    addrPegawai first;
 };
 
-addrPeg allocatePeg(string namaPeg, int idPeg, string jabatan, int gaji);
+void createListPegawai(listPegawai &LP);
+addrPegawai allocatePegawai(int id, string nama, string jabatan, float gaji, string jenis);
+void insertFirstPegawai(listPegawai &LP, addrPegawai P);
+void insertLastPegawai(listPegawai &LP, addrPegawai P);
+void insertAfterPegawai(addrPegawai prec, addrPegawai P);
+void deleteFirstPegawai(listPegawai &LP, addrPegawai &P);
+void deleteLastPegawai(listPegawai &LP, addrPegawai &P);
+void deleteAfterPegawai(addrPegawai prec, addrPegawai &P);
+addrPegawai findPegawai(listPegawai LP, int id);
+void showPegawai(listPegawai LP);
+int countPegawai(listPegawai LP);
+void editPegawai(addrPegawai P, string namaBaru, string jabatanBaru, float gajiBaru, string jenisBaru);
 
-#endif // PEGAWAI_H_INCLUDED
+#endif
