@@ -40,4 +40,4 @@ void editPegawai(addrPegawai P, string namaBaru, string jabatanBaru, float gajiB
 
 #endif
 
-ini pegawai.h nya
+
