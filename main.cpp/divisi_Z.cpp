@@ -2,83 +2,80 @@
 #include <iostream>
 using namespace std;
 
-addrDivisi allocateDivisi(int id, string nama, string pic, int kapasitas) {
+addrDivisi allocateDivisi(int id, string nama, int kapasitas) {
     addrDivisi D = new elmDivisi;
-
     D->idDivisi = id;
     D->namaDivisi = nama;
-    D->pic = pic;
     D->kapasitas = kapasitas;
     D->jumlahPegawai = 0;
-
     D->next = nullptr;
     D->prev = nullptr;
-
     return D;
 }
 
-void insertLastDivisi(listDivisi &L, addrDivisi D) {
-    if (L.first == nullptr) {
-        L.first = D;
-        L.last = D;
+void insertLastDivisi(listDivisi &LD, addrDivisi D) {
+    if (LD.first == nullptr) {
+        LD.first = D;
+        LD.last = D;
     } else {
+        D->prev = LD.last;
         LD.last->next = D;
-        D->prev = L.last;
-        L.last = D;
+        LD.last = D;
     }
 }
 
-void deleteFirstDivisi(listDivisi &L, addrDivisi &D) {
-    if (L.first == nullptr) {
-        D = NULL;
-    } else if (L.first == L.last) {
-        D = L.first;
-        L.first = L.last = nullptr;
-    } else {
-        D = L.first;
-        L.first = D->next;
-        L.first->prev = nullptr;
 
-        D->next = nullptr;
-    }
-}
-
-void deleteAfterDivisi(addrDivisi prec, addrDivisi &D) {
-    if (prec != nullptr && prec->next != nullptr) {
-        D = prec->next;
-
-        prec->next = D->next;
-        if (D->next != nullptr) {
-            D->next->prev = prec;
+void deleteFirstDivisi(listDivisi &LD, addrDivisi &D) {
+    if (LD.first != nullptr) {
+        D = LD.first;
+        if (LD.first == LD.last) {
+            LD.first = nullptr;
+            LD.last = nullptr;
+        } else {
+            LD.first = D->next;
+            LD.first->prev = nullptr;
         }
-
         D->next = nullptr;
         D->prev = nullptr;
     }
 }
 
-void showDivisi(listDivisi L) {
-    addrDivisi D = L.first;
 
-    while (D != nullptr) {
-        cout << "ID: " << D->idDivisi
-             << " | Nama: " << D->namaDivisi
-             << " | PIC: " << D->pic
-             << " | Kapasitas: " << D->kapasitas
-             << " | Jumlah Pegawai: " << D->jumlahPegawai
-             << endl;
-
-        D = D->next;
+void deleteAfterDivisi(addrDivisi prec, addrDivisi &D) {
+    if (prec != nullptr && prec->next != nullptr) {
+        D = prec->next;
+        prec->next = D->next;
+        if (D->next != nullptr) {
+            D->next->prev = prec;
+        }
+        D->next = nullptr;
+        D->prev = nullptr;
     }
 }
 
-void editDivisi(addrDivisi D, string namaBaru, string picBaru, int kapasitasBaru) {
+
+void showDivisi(listDivisi LD) {
+    addrDivisi P = LD.first;
+    if (P == nullptr) {
+        cout << "List divisi kosong" << endl;
+    } else {
+        while (P != nullptr) {
+            cout << "ID Divisi      : " << P->idDivisi << endl;
+            cout << "Nama Divisi    : " << P->namaDivisi << endl;
+            cout << "Kapasitas      : " << P->kapasitas << endl;
+            cout << "Jumlah Pegawai : " << P->jumlahPegawai << endl;
+            cout << "-----------------------------" << endl;
+            P = P->next;
+        }
+    }
+}
+
+
+void editDivisi(addrDivisi D, string namaBaru, int kapasitasBaru) {
     if (D != nullptr) {
         D->namaDivisi = namaBaru;
-        D->pic = picBaru;
         D->kapasitas = kapasitasBaru;
     }
 }
-
 
 
