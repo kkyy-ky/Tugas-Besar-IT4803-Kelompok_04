@@ -1,59 +1,60 @@
 #include "pegawai.h"
+#include <iostream>
+using namespace std;
 
-void createListPegawai(listPegawai &L) {
-    L.first = nullptr;
+void createListPegawai(listPegawai &LP) {
+    LP.first = nullptr;
 }
 
-void insertFirstPegawai(listPegawai &L, addrPegawai P) {
-    P->next = L.first;
-    L.first = P;
+void insertFirstPegawai(listPegawai &LP, addrPegawai P) {
+    if (P != nullptr) {
+        P->next = LP.first;
+        LP.first = P;
+    }
 }
 
 void insertAfterPegawai(addrPegawai prec, addrPegawai P) {
-    if (prec != nullptr) {
+    if (prec != nullptr && P != nullptr) {
         P->next = prec->next;
         prec->next = P;
     }
 }
 
-void deleteLastPegawai(listPegawai &L, addrPegawai &P) {
-    if (L.first == nullptr) {
-        P = nullptr;
-    } else if (L.first->next == nullptr) {
-        P = L.first;
-        L.first = nullptr;
-    } else {
-        addrPegawai Q = L.first;
-        while (Q->next->next != nullptr) {
-            Q = Q->next;
+void deleteLastPegawai(listPegawai &LP, addrPegawai &P) {
+    if (LP.first != nullptr) {
+        if (LP.first->next == nullptr) {
+            P = LP.first;
+            LP.first = nullptr;
+        } else {
+            addrPegawai Q = LP.first;
+            while (Q->next->next != nullptr) {
+                Q = Q->next;
+            }
+            P = Q->next;
+            Q->next = nullptr;
         }
-        P = Q->next;
-        Q->next = nullptr;
+    } else {
+        P = nullptr;
     }
 }
 
-addrPegawai findPegawai(listPegawai L, int id) {
-    addrPegawai P = L.first;
-
-    while (P != NULL) {
-        if (P->idPegawai == id) {
-            return P;
-        }
+addrPegawai findPegawai(listPegawai LP, int idPegawai) {
+    addrPegawai P = LP.first;
+    while (P != nullptr && P->idPegawai != idPegawai) {
         P = P->next;
     }
-
-    return nullptr;
+    return P;
 }
 
-int countPegawai(listPegawai L) {
+int countPegawai(listPegawai LP) {
     int count = 0;
-    addrPegawai P = L.first;
-
+    addrPegawai P = LP.first;
     while (P != nullptr) {
         count++;
         P = P->next;
     }
-
     return count;
 }
 
+
+pegawai.Z
