@@ -2,74 +2,71 @@
 #include <iostream>
 using namespace std;
 
-void createListDivisi(listDivisi &L) {
-    L.first = nullptr;
-    L.last = nullptr;
+void createListDivisi(listDivisi &LD) {
+    LD.first = nullptr;
+    LD.last = nullptr;
 }
 
-void insertFirstDivisi(listDivisi &L, addrDivisi D) {
-    if (L.first == nullptr) {
-        L.first = D;
-        L.last = D;
+
+void insertFirstDivisi(listDivisi &LD, addrDivisi D) {
+    if (LD.first == nullptr) {
+        LD.first = D;
+        LD.last = D;
     } else {
-        D->next = L.first;
-        L.first->prev = D;
-        L.first = D;
+        D->next = LD.first;
+        LD.first->prev = D;
+        LD.first = D;
     }
 }
 
-void insertAfterDivisi(addrDivisi prec, addrDivisi D) {
+
+void insertAfterDivisi(listDivisi &LD, addrDivisi prec, addrDivisi D) {
     if (prec != nullptr) {
-        D->next = prec->next;
-        D->prev = prec;
-
-        if (prec->next != nullptr) {
+        if (prec == LD.last) {
+            insertLastDivisi(LD, D);
+        } else {
+            D->next = prec->next;
+            D->prev = prec;
             prec->next->prev = D;
+            prec->next = D;
         }
-
-        prec->next = D;
     }
 }
 
-void deleteLastDivisi(listDivisi &L, addrDivisi &D) {
-    if (L.first == nullptr) {
-        D = nullptr;
-    } else if (L.first == L.last) {
-        D = L.first;
-        L.first = L.last = nullptr;
-    } else {
-        D = L.last;
-        L.last = D->prev;
-        L.last->next = nullptr;
+void deleteLastDivisi(listDivisi &LD, addrDivisi &D) {
+    if (LD.last != nullptr) {
+        D = LD.last;
 
+        if (LD.first == LD.last) {
+            LD.first = nullptr;
+            LD.last = nullptr;
+        } else {
+            LD.last = D->prev;
+            LD.last->next = nullptr;
+        }
         D->prev = nullptr;
+        D->next = nullptr;
     }
 }
 
-addrDivisi findDivisi(listDivisi L, int id) {
-    addrDivisi D = L.first;
 
-    while (D != nullptr) {
-        if (D->idDivisi == id) {
-            return D;
-        }
-        D = D->next;
+addrDivisi findDivisi(listDivisi LD, int idDivisi) {
+    addrDivisi P = LD.first;
+    while (P != nullptr && P->idDivisi != idDivisi) {
+        P = P->next;
     }
-
-    return nullptr;
+    return P;
 }
 
-int countDivisi(listDivisi L) {
+
+int countDivisi(listDivisi LD) {
     int count = 0;
-    addrDivisi D = L.first;
-
-    while (D != nullptr) {
+    addrDivisi P = LD.first;
+    while (P != nullptr) {
         count++;
-        D = D->next;
+        P = P->next;
     }
-
     return count;
 }
-
 
 
