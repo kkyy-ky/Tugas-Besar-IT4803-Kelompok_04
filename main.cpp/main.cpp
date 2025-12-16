@@ -1,274 +1,185 @@
-#include "main.h"
 #include <iostream>
+#include "divisi.h"
+#include "pegawai.h"
+#include "relation.h"
 
 using namespace std;
-
-void initDummyData(listDivisi &LD, listPegawai &LP, listRelation &LR) {
-    createListDivisi(LD);
-    insertLastDivisi(LD, allocateDivisi(1, "IT", 10));
-    insertLastDivisi(LD, allocateDivisi(2, "HRD", 5));
-    insertLastDivisi(LD, allocateDivisi(3, "Finance", 7));
-
-    createListPegawai(LP);
-    insertLastPegawai(LP, allocatePegawai(101, "Andi", "Programmer", 8000000));
-    insertLastPegawai(LP, allocatePegawai(102, "Budi", "HR Staff", 6000000));
-    insertLastPegawai(LP, allocatePegawai(103, "Citra", "Accountant", 7000000));
-
-    createListRelation(LR);
-    insertRelation(LR, LD, LP, 1, 101);
-    insertRelation(LR, LD, LP, 2, 102);
-    insertRelation(LR, LD, LP, 3, 103);
-}
-
-void menuUtama() {
-    cout << "\n===== MENU UTAMA =====\n";
-    cout << "1. Divisi\n";
-    cout << "2. Pegawai\n";
-    cout << "3. Relasi\n";
-    cout << "0. Keluar\n";
-    cout << "Pilih menu: ";
-}
-
-void menuDivisi() {
-    cout << "\n===== MENU DIVISI =====\n";
-    cout << "1. Insert Divisi\n";
-    cout << "2. Delete Divisi\n";
-    cout << "3. Find Divisi\n";
-    cout << "4. Show Divisi\n";
-    cout << "5. Count Divisi\n";
-    cout << "6. Edit Divisi\n";
-    cout << "0. Kembali\n";
-    cout << "Pilih menu: ";
-}
-
-void menuPegawai() {
-    cout << "\n===== MENU PEGAWAI =====\n";
-    cout << "1. Insert Pegawai\n";
-    cout << "2. Delete Pegawai\n";
-    cout << "3. Find Pegawai\n";
-    cout << "4. Show Pegawai\n";
-    cout << "5. Count Pegawai\n";
-    cout << "6. Edit Pegawai\n";
-    cout << "0. Kembali\n";
-    cout << "Pilih menu: ";
-}
-
-void menuRelasi() {
-    cout << "\n===== MENU RELASI =====\n";
-    cout << "1. Insert Relasi\n";
-    cout << "2. Delete Relasi\n";
-    cout << "3. Find Relasi\n";
-    cout << "4. Show Relasi\n";
-    cout << "5. Count Relasi\n";
-    cout << "6. Edit Relasi\n";
-    cout << "0. Kembali\n";
-    cout << "Pilih menu: ";
-}
-
-void prosesMenuDivisi(listDivisi &LD) {
-    int pilih;
-    menuDivisi();
-    cin >> pilih;
-
-    switch (pilih) {
-    case 1: {
-        int id, kapasitas;
-        string nama;
-        cout << "ID Divisi: ";
-        cin >> id;
-        cout << "Nama Divisi: ";
-        cin >> nama;
-        cout << "Kapasitas: ";
-        cin >> kapasitas;
-        insertLastDivisi(LD, allocateDivisi(id, nama, kapasitas));
-        break;
-    }
-    case 2: {
-        addrDivisi D;
-        deleteLastDivisi(LD, D);
-        break;
-    }
-    case 3: {
-        int id;
-        cout << "ID Divisi: ";
-        cin >> id;
-        addrDivisi D = findDivisi(LD, id);
-        if (D != nullptr) cout << "Divisi ditemukan: " << D->namaDivisi << endl;
-        else cout << "Divisi tidak ditemukan\n";
-        break;
-    }
-    case 4:
-        showDivisi(LD);
-        break;
-    case 5:
-        cout << "Jumlah Divisi: " << countDivisi(LD) << endl;
-        break;
-    case 6: {
-        int id, kapasitas;
-        string nama;
-        cout << "ID Divisi: ";
-        cin >> id;
-        addrDivisi D = findDivisi(LD, id);
-        if (D != nullptr) {
-            cout << "Nama Baru: ";
-            cin >> nama;
-            cout << "Kapasitas Baru: ";
-            cin >> kapasitas;
-            editDivisi(D, nama, kapasitas);
-        }
-        break;
-    }
-    }
-    while (pilih != 0);
-}
-
-void prosesMenuPegawai(listPegawai &LP) {
-    int pilih;
-    menuPegawai();
-    cin >> pilih;
-
-    switch (pilih) {
-    case 1: {
-        int id;
-        string nama, jabatan;
-        float gaji;
-        cout << "ID Pegawai: ";
-        cin >> id;
-        cout << "Nama: ";
-        cin >> nama;
-        cout << "Jabatan: ";
-        cin >> jabatan;
-        cout << "Gaji: ";
-        cin >> gaji;
-        insertLastPegawai(LP, allocatePegawai(id, nama, jabatan, gaji));
-        break;
-    }
-    case 2: {
-        addrPegawai P;
-        deleteLastPegawai(LP, P);
-        break;
-    }
-    case 3: {
-        int id;
-        cout << "ID Pegawai: ";
-        cin >> id;
-        addrPegawai P = findPegawai(LP, id);
-        if (P != nullptr) cout << "Pegawai ditemukan: " << P->namaPegawai << endl;
-        else cout << "Pegawai tidak ditemukan\n";
-        break;
-    }
-    case 4:
-        showPegawai(LP);
-        break;
-    case 5:
-        cout << "Jumlah Pegawai: " << countPegawai(LP) << endl;
-        break;
-    case 6: {
-        int id;
-        string nama, jabatan;
-        float gaji;
-        cout << "ID Pegawai: ";
-        cin >> id;
-        addrPegawai P = findPegawai(LP, id);
-        if (P != nullptr) {
-            cout << "Nama Baru: ";
-            cin >> nama;
-            cout << "Jabatan Baru: ";
-            cin >> jabatan;
-            cout << "Gaji Baru: ";
-            cin >> gaji;
-            editPegawai(P, nama, jabatan, gaji);
-        }
-        break;
-    }
-    }
-    while (pilih != 0);
-}
-
-void prosesMenuRelasi(listDivisi &LD, listPegawai &LP, listRelation &LR) {
-    int pilih;
-    menuRelasi();
-    cin >> pilih;
-
-    switch (pilih) {
-    case 1: {
-        int idDiv, idPeg;
-        cout << "ID Divisi: ";
-        cin >> idDiv;
-        cout << "ID Pegawai: ";
-        cin >> idPeg;
-        insertRelation(LR, LD, LP, idDiv, idPeg);
-        break;
-    }
-    case 2: {
-        int idDiv, idPeg;
-        cout << "ID Divisi: ";
-        cin >> idDiv;
-        cout << "ID Pegawai: ";
-        cin >> idPeg;
-        deleteRelation(LR, LD, LP, idDiv, idPeg);
-        break;
-    }
-    case 3: {
-        int idDiv, idPeg;
-        cout << "ID Divisi: ";
-        cin >> idDiv;
-        cout << "ID Pegawai: ";
-        cin >> idPeg;
-        addrRelation R = findRelation(LR, idDiv, idPeg);
-        if (R != nullptr) cout << "Relasi ditemukan\n";
-        else cout << "Relasi tidak ditemukan\n";
-        break;
-    }
-    case 4:
-        showAllRelation(LR);
-        break;
-    case 5:
-        cout << "Jumlah Relasi: " << countChildOfParent(LR, 1)
-            + countChildOfParent(LR, 2)
-            + countChildOfParent(LR, 3) << endl;
-        break;
-    case 6: {
-        int oD, oP, nD, nP;
-        cout << "Old ID Divisi: ";
-        cin >> oD;
-        cout << "Old ID Pegawai: ";
-        cin >> oP;
-        cout << "New ID Divisi: ";
-        cin >> nD;
-        cout << "New ID Pegawai: ";
-        cin >> nP;
-        editRelation(LR, LD, LP, oD, oP, nD, nP);
-        break;
-    }
-    }
-    while (pilih != 0);
-}
 
 int main() {
     listDivisi LD;
     listPegawai LP;
     listRelation LR;
-    initDummyData(LD, LP, LR);
 
-    int pilih;
-    menuUtama();
-    cin >> pilih;
+    addrDivisi d;
+    addrPegawai p;
 
-    switch (pilih) {
-    case 1:
-        prosesMenuDivisi(LD);
-        break;
-    case 2:
-        prosesMenuPegawai(LP);
-        break;
-    case 3:
-        prosesMenuRelasi(LD, LP, LR);
-        break;
+    createListDivisi(LD);
+    createListPegawai(LP);
+    createListRelation(LR);
+
+    int pilihUtama, pilihSub;
+
+    do {
+        cout << "\n===== MENU UTAMA =====" << endl;
+        cout << "1. Divisi" << endl;
+        cout << "2. Pegawai" << endl;
+        cout << "3. Relasi" << endl;
+        cout << "0. Keluar" << endl;
+        cout << "Pilih: ";
+        cin >> pilihUtama;
+
+        switch (pilihUtama) {
+
+        case 1:
+            do {
+                cout << "\n===== MENU DIVISI =====" << endl;
+                cout << "1. Insert Divisi" << endl;
+                cout << "2. Delete Divisi" << endl;
+                cout << "3. Find Divisi" << endl;
+                cout << "4. Show Divisi" << endl;
+                cout << "5. Count Divisi" << endl;
+                cout << "6. Edit Divisi" << endl;
+                cout << "0. Kembali" << endl;
+                cout << "Pilih: ";
+                cin >> pilihSub;
+
+                switch (pilihSub) {
+                case 1:
+                    d = allocateDivisi(1, "IT", 10);
+                    insertLastDivisi(LD, d);
+                    cout << "Insert divisi berhasil" << endl;
+                    break;
+
+                case 2:
+                    deleteLastDivisi(LD, d);
+                    cout << "Delete divisi berhasil" << endl;
+                    break;
+
+                case 3:
+                    d = findDivisi(LD, 1);
+                    if (d != nullptr)
+                        cout << "Divisi ditemukan: " << d->namaDivisi << endl;
+                    else
+                        cout << "Divisi tidak ditemukan" << endl;
+                    break;
+
+                case 4:
+                    showDivisi(LD);
+                    break;
+
+                case 5:
+                    cout << "Jumlah divisi: " << countDivisi(LD) << endl;
+                    break;
+
+                case 6:
+                    d = findDivisi(LD, 1);
+                    if (d != nullptr)
+                        editDivisi(d, "IT Updated", 15);
+                    break;
+                }
+            } while (pilihSub != 0);
+            break;
+
+        case 2:
+            do {
+                cout << "\n===== MENU PEGAWAI =====" << endl;
+                cout << "1. Insert Pegawai" << endl;
+                cout << "2. Delete Pegawai" << endl;
+                cout << "3. Find Pegawai" << endl;
+                cout << "4. Show Pegawai" << endl;
+                cout << "5. Count Pegawai" << endl;
+                cout << "6. Edit Pegawai" << endl;
+                cout << "0. Kembali" << endl;
+                cout << "Pilih: ";
+                cin >> pilihSub;
+
+                switch (pilihSub) {
+                case 1:
+                    p = allocatePegawai(101, "Andi", "Programmer", 8000000);
+                    insertLastPegawai(LP, p);
+                    cout << "Insert pegawai berhasil" << endl;
+                    break;
+
+                case 2:
+                    deleteLastPegawai(LP, p);
+                    cout << "Delete pegawai berhasil" << endl;
+                    break;
+
+                case 3:
+                    p = findPegawai(LP, 101);
+                    if (p != nullptr)
+                        cout << "Pegawai ditemukan: " << p->namaPegawai << endl;
+                    else
+                        cout << "Pegawai tidak ditemukan" << endl;
+                    break;
+
+                case 4:
+                    showPegawai(LP);
+                    break;
+
+                case 5:
+                    cout << "Jumlah pegawai: " << countPegawai(LP) << endl;
+                    break;
+
+                case 6:
+                    p = findPegawai(LP, 101);
+                    if (p != nullptr)
+                        editPegawai(p, "Andi Update", "Senior Programmer", 9000000);
+                    break;
+                }
+            } while (pilihSub != 0);
+            break;
+
+        case 3:
+            do {
+                cout << "\n===== MENU RELASI =====" << endl;
+                cout << "1. Insert Relasi" << endl;
+                cout << "2. Delete Relasi" << endl;
+                cout << "3. Find Relasi" << endl;
+                cout << "4. Show Semua Relasi" << endl;
+                cout << "5. Count Child of Parent" << endl;
+                cout << "6. Edit Relasi" << endl;
+                cout << "0. Kembali" << endl;
+                cout << "Pilih: ";
+                cin >> pilihSub;
+
+                switch (pilihSub) {
+                case 1:
+                    insertRelation(LR, LD, LP, 1, 101);
+                    cout << "Insert relasi berhasil" << endl;
+                    break;
+
+                case 2:
+                    deleteRelation(LR, LD, LP, 1, 101);
+                    cout << "Delete relasi berhasil" << endl;
+                    break;
+
+                case 3:
+                    if (findRelation(LR, 1, 101) != nullptr)
+                        cout << "Relasi ditemukan" << endl;
+                    else
+                        cout << "Relasi tidak ditemukan" << endl;
+                    break;
+
+                case 4:
+                    showAllRelation(LR);
+                    break;
+
+                case 5:
+                    cout << "Jumlah pegawai di divisi 1: "
+                         << countChildOfParent(LR, 1) << endl;
+                    break;
+
+                case 6:
+                    editRelation(LR, LD, LP, 1, 101, 2, 101);
+                    cout << "Edit relasi berhasil" << endl;
+                    break;
+                }
+            } while (pilihSub != 0);
+            break;
         }
-    while (pilih != 0);
 
-    cout << "Program selesai.\n";
+    } while (pilihUtama != 0);
+
     return 0;
 }
-
