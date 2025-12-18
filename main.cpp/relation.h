@@ -38,4 +38,3 @@ int countChildWithoutParent(listPegawai LP, listRelation LR);
 void editRelation(listRelation &LR, listDivisi &LD, listPegawai &LP, int oldDiv, int oldPeg, int newDiv, int newPeg);
 
 #endif
-
