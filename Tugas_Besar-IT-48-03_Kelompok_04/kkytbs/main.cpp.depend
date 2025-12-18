@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1763877792 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\divisi_a.cpp
+	"divisi.h"
+	<iostream>
+
+1763877792 c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\divisi.h
+	<iostream>
+	<string>
+
+1763877792 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\divisi_z.cpp
+	"divisi.h"
+	<iostream>
+
+1763874766 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\pegawai_a.cpp
+	"pegawai.h"
+	<iostream>
+
+1763874766 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\pegawai_z.cpp
+	"pegawai.h"
+	<iostream>
+
+1763817503 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\relation.cpp
+
+1763877792 source:c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\main.cpp
+	"main.h"
+
+1763877792 c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\main.h
+	<iostream>
+	"divisi.h"
+	"pegawai.h"
+	"relation.h"
+
+1763877818 c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\pegawai.h
+	<iostream>
+	<string>
+
+1763877792 c:\users\zazkia\documents\tp smster 3\tugas_besar-it-48-03_kelompok_04\main.cpp\relation.h
+	"divisi.h"
+	"pegawai.h"
+
