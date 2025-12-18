@@ -14,5 +14,3 @@ void prosesMenuPegawai(listPegawai &LP);
 void prosesMenuRelasi(listDivisi &LD, listPegawai &LP, listRelation &LR);
 
 #endif
-
-
