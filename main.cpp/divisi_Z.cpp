@@ -41,9 +41,12 @@ void deleteFirstDivisi(listDivisi &LD, addrDivisi &D) {
 }
 
 
-void deleteAfterDivisi(addrDivisi prec, addrDivisi &D) {
+void deleteAfterDivisi(listDivisi &LD, addrDivisi prec, addrDivisi &D) {
     if (prec != nullptr && prec->next != nullptr) {
         D = prec->next;
+        if (D == LD.last) {
+            LD.last = prec;
+        }
         prec->next = D->next;
         if (D->next != nullptr) {
             D->next->prev = prec;
@@ -52,6 +55,7 @@ void deleteAfterDivisi(addrDivisi prec, addrDivisi &D) {
         D->prev = nullptr;
     }
 }
+
 
 
 void showDivisi(listDivisi LD) {
@@ -77,5 +81,3 @@ void editDivisi(addrDivisi D, string namaBaru, int kapasitasBaru) {
         D->kapasitas = kapasitasBaru;
     }
 }
-
-
