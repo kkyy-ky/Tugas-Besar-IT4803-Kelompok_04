@@ -10,9 +10,9 @@ void initDummyData(listDivisi &LD, listPegawai &LP, listRelation &LR) {
     insertLastDivisi(LD, allocateDivisi(2, "HRD", 5));
     insertLastDivisi(LD, allocateDivisi(3, "Finance", 7));
 
-    insertLastPegawai(LP, allocatePegawai(101, "Andi", "Programmer", 8));
-    insertLastPegawai(LP, allocatePegawai(102, "Budi", "HR Staff", 6));
-    insertLastPegawai(LP, allocatePegawai(103, "Citra", "Finance Staff", 6.5));
+    insertLastPegawai(LP, allocatePegawai(101, "kiki", "Programmer", 8));
+    insertLastPegawai(LP, allocatePegawai(102, "supri", "HR Staff", 6));
+    insertLastPegawai(LP, allocatePegawai(103, "naya", "Finance Staff", 6.5));
 
     insertRelation(LR, LD, LP, 1, 101);
     insertRelation(LR, LD, LP, 2, 102);
