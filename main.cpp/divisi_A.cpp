@@ -68,5 +68,3 @@ int countDivisi(listDivisi LD) {
     }
     return count;
 }
-
-
