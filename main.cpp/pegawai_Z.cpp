@@ -7,14 +7,12 @@ void createListPegawai(listPegawai &LP) {
 }
 
 void insertFirstPegawai(listPegawai &LP, addrPegawai P) {
-    if (P != nullptr) {
         P->next = LP.first;
         LP.first = P;
-    }
 }
 
-void insertAfterPegawai(addrPegawai prec, addrPegawai P) {
-    if (prec != nullptr && P != nullptr) {
+void insertAfterPegawai(listPegawai &LP, addrPegawai prec, addrPegawai P) {
+    if (prec != nullptr) {
         P->next = prec->next;
         prec->next = P;
     }
@@ -55,6 +53,3 @@ int countPegawai(listPegawai LP) {
     }
     return count;
 }
-
-
-pegawai.Z
