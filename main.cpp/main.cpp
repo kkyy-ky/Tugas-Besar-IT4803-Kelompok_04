@@ -26,6 +26,7 @@ int main() {
     createListDivisi(LD);
     createListPegawai(LP);
     createListRelation(LR);
+    initDummyData(LD, LP, LR);
 
     int menuUtama = -1;
     while (menuUtama != 0) {
